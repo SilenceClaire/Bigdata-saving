@@ -1,0 +1,5 @@
+陈思日记
+今天课上完成了第三个实验，查找职业人数排名的前五名。修改sql代码就好了。
+课下完成了第一二个扩展实验
+1. 第一个实验主要是弄清楚，每一步的数据结构是什么，最后用collect,一开始总想找map有关的函数。但我总是感觉这样是可以做的，这个点需要接下来几天系统学习一下scala
+2. 第二个实验是在shell创建外部表，读取bucket桶中的文件，注意row format delimited fields terminated by，lines terminated by和文件的location，一开始看txt以为用逗号之间是一组值一直在想怎么分割数字和字符串，后来发现其实逗号就是用来分割字段的，lines terminated by 只支持\n。
