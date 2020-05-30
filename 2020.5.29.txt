@@ -1,0 +1,15 @@
+陈思日记
+一. 今天学习了有关scala语言的map和tuple的知识，总结了一下我感觉会常用的只是点：
+1.获取map的值：map.get("keyname").get
+2.遍历map: map.foreach(f => {println("key:"+ f._1 +"value:"+f._2)})
+(scala的中的下划线功能好强大)
+3.map中的filter方法：mapfilter(_._2.equals("keyname")).foreach(println)
+4.tuple在scala中的理解，我认为可以是一个数据类型，也可以说一个类，创建的时候可以使用new,也可以不适用new。
+5. 取元组的值用"._"方法。tuple里最多有22个参数
+二. 今天学习的第二部份是RDD的转换，总结的部份知识点和对应代码如下：
+1. RDD整体分为Value类型和Key-Value类型
+2. map(func): 将1-10的数组的RDD所有元素乘以2形成新的RDD
+    val rdd2= rdd1.map(_*2)
+    (_这里表示该数组中的所有元素)
+3. mapPartitons(func): 类似于map使用，但是独立的运行在RDD每个分片上，假设有N个元素，M个分区，map函数将被调用N次，mapPartitions被调用M次。一个函数一次处理所有分区。
+rdd.mapPartitions(x=>x.map(_*2))
