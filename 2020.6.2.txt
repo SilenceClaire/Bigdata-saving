@@ -1,0 +1,17 @@
+陈思日记
+今天完成了实操五的扩展问题，核心思路是在Utils中编写模糊身份证号码的函数：
+代码如下：
+ public static String makeIdMosaic(String inputBase64) throws Exception{
+        String string1 = inputBase64.substring(4,14);
+        String string2 = "****"+string1+"****";
+        return string2;
+    }
+demo.scala中主要修改代码如下：
+ val row = sc.textFile("file:///E:/user_data.txt").map(_.split(",")).map(p => Row(p(0).toInt, p(1), p(2), p(3).toLong, p(4))).toDF()
+    row.registerTempTable("row")
+    spark.udf.register("mosaic", (str: String) => Utils.makeIdMosaic(str))
+    val result = sql("SELECT id, name, sex, idCard, pic, mosaic(IdCard) FROM row ORDER BY id")
+
+    //输出结果到控制台
+    result.map(t => "id:" + t(0) + " name:" + t(1) + " sex:" + t(2) + "  idCard:" + t(5)).collect().foreach(println)
+    sc.stop()
