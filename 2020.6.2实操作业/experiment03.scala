@@ -17,6 +17,8 @@ import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.json.*
 import org.nlpcn.commons.lang.util.IOUtil
 
+import net.sf.json.JSONArray
+import net.sf.json.JSONObject
 
 
 object Main {
@@ -85,6 +87,41 @@ object Main {
   }
 
 
+
+
+
+    def formatRsToJsonArray(rs: ResultSet): Nothing = {
+      val md = rs.getMetaData
+      val num = md.getColumnCount
+      val array = new Nothing
+      while ( {
+        rs.next
+      }) { // 如果结果集中有值
+        val mapOfColValues = new Nothing
+        for (i <- 1 to num) {
+          mapOfColValues.put(md.getColumnName(i), rs.getObject(i))
+
+          System.out.println(mapOfColValues.toString)
+        }
+        array.add(mapOfColValues)
+      }
+      array
+    }
+
+
+
+
+    var res = ""
+
+    for (k <- 0 until array.length()) {
+
+      res = res + array.get(k).toString + '\n'
+
+    }
+
+    res
+
+  }
     
 
 
